@@ -4,6 +4,7 @@ import { format } from 'date-fns';
 import Dashboard from './components/Dashboard';
 import AddEntry from './components/AddEntry';
 import Reports from './components/Reports';
+import { API_ENDPOINTS, APP_CONFIG } from './config/api';
 import './App.css';
 
 function App() {
@@ -17,9 +18,15 @@ function App() {
 
   const fetchHealthData = async () => {
     try {
-      const response = await axios.get('/api/health-data');
+      if (APP_CONFIG.DEBUG_MODE) {
+        console.log('Fetching health data from:', API_ENDPOINTS.HEALTH_DATA);
+      }
+      const response = await axios.get(API_ENDPOINTS.HEALTH_DATA);
       setHealthData(response.data);
       setLoading(false);
+      if (APP_CONFIG.DEBUG_MODE) {
+        console.log('Health data fetched successfully:', response.data.length, 'entries');
+      }
     } catch (error) {
       console.error('Error fetching health data:', error);
       setLoading(false);
@@ -28,7 +35,7 @@ function App() {
 
   const addHealthData = async (data) => {
     try {
-      const response = await axios.post('/api/health-data', data);
+      const response = await axios.post(API_ENDPOINTS.HEALTH_DATA, data);
       setHealthData([response.data, ...healthData]);
       setActiveTab('dashboard');
     } catch (error) {
@@ -38,7 +45,7 @@ function App() {
 
   const deleteHealthData = async (id) => {
     try {
-      await axios.delete(`/api/health-data/${id}`);
+      await axios.delete(`${API_ENDPOINTS.HEALTH_DATA}/${id}`);
       setHealthData(healthData.filter(item => item._id !== id));
     } catch (error) {
       console.error('Error deleting health data:', error);
@@ -72,8 +79,13 @@ function App() {
   return (
     <div className="container">
       <div className="header">
-        <h1>Health Tracker</h1>
+        <h1>{APP_CONFIG.NAME}</h1>
         <p>Track your calories, sleep, workouts and more</p>
+        {APP_CONFIG.DEBUG_MODE && (
+          <small style={{ color: '#666', fontSize: '12px' }}>
+            Version: {APP_CONFIG.VERSION} | API: {API_ENDPOINTS.HEALTH_DATA}
+          </small>
+        )}
       </div>
 
       <div className="nav-tabs">

@@ -49,12 +49,25 @@ A comprehensive health tracking application built with React, Node.js, MongoDB, 
    - Update the MongoDB connection string in `server.js` if needed
 
 5. **Environment Variables**
-   Create a `.env` file in the root directory:
+   
+   **Option 1: Use the setup script (Recommended)**
+   ```bash
+   chmod +x setup-env.sh
+   ./setup-env.sh
+   ```
+   
+   **Option 2: Manual setup**
+   
+   Backend: Create a `.env` file in the root directory:
    ```
    MONGODB_URI=mongodb://localhost:27017/health-tracker
    PORT=5000
    NODE_ENV=development
    ```
+   
+   Frontend: Create environment files in the `client` directory:
+   - `.env.development.local` for development
+   - `.env.production.local` for production
 
 ## Running the Application
 
@@ -85,6 +98,20 @@ A comprehensive health tracking application built with React, Node.js, MongoDB, 
    ```bash
    npm start
    ```
+
+## Environment Variables
+
+### Backend Variables
+- `MONGODB_URI`: MongoDB connection string
+- `PORT`: Server port (default: 5000)
+- `NODE_ENV`: Environment (development/production)
+
+### Frontend Variables
+- `REACT_APP_API_URL`: Backend API URL
+- `REACT_APP_APP_NAME`: Application name
+- `REACT_APP_APP_VERSION`: Application version
+- `REACT_APP_ENABLE_ANALYTICS`: Enable analytics features
+- `REACT_APP_ENABLE_DEBUG_MODE`: Enable debug mode (development only)
 
 ## API Endpoints
 
