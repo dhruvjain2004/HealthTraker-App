@@ -12,18 +12,25 @@
     "heroku-postbuild": "npm run install-client && npm run build"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^7.5.0",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
-    "bcryptjs": "^2.4.3",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
-    "express-validator": "^7.0.1"
+    "mongodb": "^6.18.0",
+    "mongoose": "^7.5.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": ["health", "tracker", "react", "nodejs", "mongodb"],
+  "keywords": [
+    "health",
+    "tracker",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
   "author": "",
   "license": "MIT"
-} 
+}
